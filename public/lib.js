@@ -10,15 +10,13 @@ class App {
 
   showComponent(name) {
     this.currentComponent = this.components[name]
-    if(this.currentComponent) {
-      this.currentComponent.controller && this.currentComponent.controller(this.currentComponent.model)
-    }
     this.updateView()
   }
 
   updateView() {
     if(this.currentComponent) {
-      this.element.innerHTML = this.currentComponent.view(this.currentComponent.model.data)
+      this.element.innerHTML = this.currentComponent.view.render(this.currentComponent.model)
+      this.currentComponent.controller && this.currentComponent.controller(this.currentComponent.model, this.currentComponent.view, this)
     } else {
       this.element.innerHTML = 'Not Found'
     }
